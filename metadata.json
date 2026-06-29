@@ -1,0 +1,6 @@
+{
+  "name": "RESGER CRM",
+  "description": "El centro de control para hacer crecer tu negocio. Controla ventas, inventario, clientes y empleados desde una sola plataforma.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

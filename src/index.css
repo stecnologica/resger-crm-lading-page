@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geist", sans-serif;
+  --font-mono: "Geist", monospace;
+
+  /* Color definitions */
+  --color-brand-primary: #003ec7;
+  --color-brand-primary-light: #0052ff;
+  --color-brand-secondary: #006c4b;
+  --color-brand-secondary-light: #3dfcb8;
+  --color-brand-tertiary: #394e77;
+  --color-brand-dark: #191b25;
+  --color-brand-surface-bg: #fbf8ff;
+  --color-brand-surface-card: #ffffff;
+  --color-brand-border: rgba(226, 232, 240, 0.8);
+}
+
+/* Custom CSS utilities for premium feel */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0px 4px 20px rgba(0, 26, 65, 0.05);
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at 50% -20%, #dde1ff 0%, #fbf8ff 60%);
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations */
+.entrance-fade {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: translateY(12px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Smooth custom scrollbars for POS and table components */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(115, 118, 136, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(115, 118, 136, 0.4);
+}
