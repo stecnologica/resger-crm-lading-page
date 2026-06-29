@@ -28,21 +28,6 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
         ]);
         
         if (error) throw error;
-
-        // Enviar correo de invitación usando Supabase Auth (Magic Link)
-        // Esto enviará un email al usuario con un enlace. 
-        // Nota: El correo que se envía es el predeterminado de Supabase para "Magic Link" o "Signup".
-        const { error: authError } = await supabase.auth.signInWithOtp({
-          email: pilotEmail,
-          options: {
-            emailRedirectTo: 'https://res-ger-crm-v1.vercel.app/',
-          }
-        });
-
-        if (authError) {
-          console.error("Error enviando el correo de invitación:", authError);
-          // Opcional: mostrar un aviso si falla el correo, aunque el registro fue exitoso
-        }
         
         setPilotSubmitted(true);
         setTimeout(() => {
