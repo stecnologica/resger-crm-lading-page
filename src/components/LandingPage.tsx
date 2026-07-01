@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { supabase } from '../supabase';
+import PrivacyPolicy from './PrivacyPolicy';
+import TermsOfService from './TermsOfService';
+import SupportPage from './SupportPage';
 
 interface LandingPageProps {
   onStartDemo: (industry?: string) => void;
@@ -13,6 +16,7 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
   const [pilotBusiness, setPilotBusiness] = useState('cafeteria');
   const [pilotSubmitted, setPilotSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [activePage, setActivePage] = useState<'main' | 'privacy' | 'terms' | 'support'>('main');
 
   const handlePilotSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +64,18 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
       a: "Los primeros 10 negocios seleccionados obtienen 60 días de acceso premium gratis y soporte de configuración prioritario a cambio de sus comentarios sinceros para seguir perfeccionando el producto."
     }
   ];
+
+  if (activePage === 'privacy') {
+    return <PrivacyPolicy onBack={() => { setActivePage('main'); window.scrollTo(0, 0); }} />;
+  }
+
+  if (activePage === 'terms') {
+    return <TermsOfService onBack={() => { setActivePage('main'); window.scrollTo(0, 0); }} />;
+  }
+
+  if (activePage === 'support') {
+    return <SupportPage onBack={() => { setActivePage('main'); window.scrollTo(0, 0); }} />;
+  }
 
   return (
     <div className="bg-[#fbf8ff] text-[#191b25] font-sans overflow-x-hidden min-h-screen">
@@ -624,7 +640,7 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
               <span className="font-display text-xl font-bold tracking-tight text-[#003ec7]">RESGER</span>
             </div>
             <p className="text-xs text-[#434656] leading-relaxed mb-2">© 2026 RESGER CRM. El centro de control definitivo para digitalizar y hacer crecer tu negocio local.</p>
-            <p className="text-[10px] text-[#434656]/60">Hecho en Argentina y Latinoamérica.</p>
+            <p className="text-[10px] text-[#434656]/60">Hecho en Colombia.</p>
           </div>
 
           <div>
@@ -639,9 +655,9 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
           <div>
             <h4 className="font-display text-xs font-bold mb-4 uppercase tracking-wider text-[#191b25]">Compañía</h4>
             <ul className="space-y-2 text-xs text-[#434656]">
-              <li><a href="#" className="hover:text-[#003ec7] transition-all">Política de Privacidad</a></li>
-              <li><a href="#" className="hover:text-[#003ec7] transition-all">Términos de Servicio</a></li>
-              <li><a href="#pilot" className="hover:text-[#003ec7] transition-all">Soporte Técnico</a></li>
+              <li><button onClick={() => { setActivePage('privacy'); window.scrollTo(0, 0); }} className="hover:text-[#003ec7] transition-all text-left">Política de Privacidad</button></li>
+              <li><button onClick={() => { setActivePage('terms'); window.scrollTo(0, 0); }} className="hover:text-[#003ec7] transition-all text-left">Términos de Servicio</button></li>
+              <li><button onClick={() => { setActivePage('support'); window.scrollTo(0, 0); }} className="hover:text-[#003ec7] transition-all text-left">Soporte Técnico</button></li>
             </ul>
           </div>
 
