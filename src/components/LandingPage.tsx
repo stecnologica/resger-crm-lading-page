@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../supabase';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfService from './TermsOfService';
@@ -17,6 +17,7 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
   const [pilotSubmitted, setPilotSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activePage, setActivePage] = useState<'main' | 'privacy' | 'terms' | 'support'>('main');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handlePilotSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,7 +95,7 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
             <a href="#faq" className="text-sm font-medium text-[#434656] hover:text-[#003ec7] transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-[#003ec7] hover:after:w-full after:transition-all">Preguntas Frecuentes</a>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             <a 
               href="https://res-ger-crm-v1.vercel.app/" 
               target="_blank"
@@ -111,12 +112,94 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
             </button>
             <a 
               href="#pilot" 
-              className="bg-[#003ec7] text-white px-5 py-2.5 rounded-lg font-display text-sm font-semibold hover:bg-[#0038b6] hover:scale-[1.03] transition-all cursor-pointer shadow-md hover:shadow-lg active:scale-[0.98]"
+              onClick={() => setMobileMenuOpen(false)}
+              className="bg-[#003ec7] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg font-display text-xs sm:text-sm font-semibold hover:bg-[#0038b6] hover:scale-[1.03] transition-all cursor-pointer shadow-md hover:shadow-lg active:scale-[0.98]"
             >
               Probar Gratis
             </a>
+
+            {/* Mobile menu toggle button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-[#191b25] hover:text-[#003ec7] p-1.5 rounded-lg transition-colors flex items-center justify-center focus:outline-none"
+              aria-label="Abrir menú de navegación"
+            >
+              <span className="material-symbols-outlined text-2xl font-bold">
+                {mobileMenuOpen ? 'close' : 'menu'}
+              </span>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown Drawer */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="md:hidden bg-[#fbf8ff]/95 backdrop-blur-xl border-b border-[#c3c5d9]/40 shadow-xl overflow-hidden px-6 pt-2 pb-6 flex flex-col gap-4 font-display"
+            >
+              <a 
+                href="#features" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="text-base font-medium text-[#191b25] hover:text-[#003ec7] py-2 border-b border-[#e1e2ec]/60 transition-colors flex items-center justify-between"
+              >
+                <span>Características</span>
+                <span className="material-symbols-outlined text-sm text-[#737686]">chevron_right</span>
+              </a>
+              <a 
+                href="#who-it-is-for" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="text-base font-medium text-[#191b25] hover:text-[#003ec7] py-2 border-b border-[#e1e2ec]/60 transition-colors flex items-center justify-between"
+              >
+                <span>Sectores</span>
+                <span className="material-symbols-outlined text-sm text-[#737686]">chevron_right</span>
+              </a>
+              <a 
+                href="#pilot" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="text-base font-medium text-[#191b25] hover:text-[#003ec7] py-2 border-b border-[#e1e2ec]/60 transition-colors flex items-center justify-between"
+              >
+                <span>Programa Piloto</span>
+                <span className="material-symbols-outlined text-sm text-[#737686]">chevron_right</span>
+              </a>
+              <a 
+                href="#faq" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className="text-base font-medium text-[#191b25] hover:text-[#003ec7] py-2 border-b border-[#e1e2ec]/60 transition-colors flex items-center justify-between"
+              >
+                <span>Preguntas Frecuentes</span>
+                <span className="material-symbols-outlined text-sm text-[#737686]">chevron_right</span>
+              </a>
+
+              <div className="pt-2 flex flex-col gap-2.5">
+                <button 
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onStartDemo('cafeteria');
+                  }} 
+                  className="w-full text-center bg-[#003ec7]/10 text-[#003ec7] font-semibold py-3 rounded-xl hover:bg-[#003ec7]/20 transition-colors flex items-center justify-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-lg">play_arrow</span>
+                  <span>Iniciar Demo Interactiva</span>
+                </button>
+                
+                <a 
+                  href="https://res-ger-crm-v1.vercel.app/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full text-center text-[#434656] hover:text-[#003ec7] font-medium py-2.5 transition-colors flex items-center justify-center gap-1 text-sm"
+                >
+                  <span>Iniciar Sesión en Producción</span>
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Main Hero Content */}
