@@ -96,14 +96,6 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
           </div>
 
           <div className="flex items-center gap-3 md:gap-4">
-            <a 
-              href="https://res-ger-crm-v1.vercel.app/" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:block font-display text-sm font-semibold text-[#434656] hover:text-[#003ec7] transition-colors px-3 py-2 cursor-pointer"
-            >
-              Iniciar Sesión
-            </a>
             <button 
               onClick={() => onStartDemo('cafeteria')} 
               className="hidden md:block font-display text-sm font-semibold text-[#434656] hover:text-[#003ec7] transition-colors px-3 py-2 cursor-pointer"
@@ -111,7 +103,9 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
               Iniciar Demo
             </button>
             <a 
-              href="#pilot" 
+              href="https://res-ger-crm-v1.vercel.app/" 
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
               className="bg-[#003ec7] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg font-display text-xs sm:text-sm font-semibold hover:bg-[#0038b6] hover:scale-[1.03] transition-all cursor-pointer shadow-md hover:shadow-lg active:scale-[0.98]"
             >
@@ -185,17 +179,6 @@ export default function LandingPage({ onStartDemo }: LandingPageProps) {
                   <span className="material-symbols-outlined text-lg">play_arrow</span>
                   <span>Iniciar Demo Interactiva</span>
                 </button>
-                
-                <a 
-                  href="https://res-ger-crm-v1.vercel.app/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center text-[#434656] hover:text-[#003ec7] font-medium py-2.5 transition-colors flex items-center justify-center gap-1 text-sm"
-                >
-                  <span>Iniciar Sesión en Producción</span>
-                  <span className="material-symbols-outlined text-sm">open_in_new</span>
-                </a>
               </div>
             </motion.div>
           )}
